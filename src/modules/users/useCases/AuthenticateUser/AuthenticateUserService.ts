@@ -22,13 +22,18 @@ export class AuthenticateUserService {
             throw new AppException('Email or password invalid!', StatusCode.FORBIDDEN);
         }
 
-        const { _id, email, password } = existsSchema;
+        const { _id, name, email, password } = existsSchema;
 
         const checkPassword = await this.hashProvider.compareHash(authenticateUserDTO.password, password);
 
         if (!checkPassword) {
             throw new AppException('Email or password invalid!', StatusCode.FORBIDDEN);
         }
+
+        const user = {
+            _id,
+            name,
+        };
 
         const payload = {
             id: _id,
@@ -39,6 +44,7 @@ export class AuthenticateUserService {
 
         return {
             token,
+            user,
         };
     }
 }

@@ -5,7 +5,7 @@ import { Router } from 'express';
 class UserRoutes {
     public registerAll(router: Router): void {
         // Login
-        new AuthenticateUserMiddleware().register(router, 'post', '/users/login');
+        new AuthenticateUserMiddleware().register(router, 'post', '/login');
 
         // Register user
         new RegisterUserMiddleware().register(router, 'post', '/users');
