@@ -21,10 +21,10 @@ export const unplashService = async (name: string): Promise<any> => {
     }
 };
 
-export const getFirstUrlPhotoUnplash = async (name: string): Promise<string> => {
+export const getFirstUrlPhotoUnplash = async (name: string): Promise<string | undefined> => {
     const dataPhotos = await unplashService(name);
 
     const firstDataPhoto = dataPhotos[0];
 
-    return firstDataPhoto.urls.full;
+    return firstDataPhoto ? firstDataPhoto.urls.full : undefined;
 };
