@@ -3,6 +3,7 @@ import { StatusCode } from '@shared/helpers/StatusCode';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { DeletePlaceService } from './DeletePlaceService';
+import { instanceToPlain } from 'class-transformer';
 
 export class DeletePlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
@@ -12,6 +13,6 @@ export class DeletePlaceController {
 
         const result = await deletePlaceService.execute(getPlaceDTO.id);
 
-        return res.status(StatusCode.OK).json(result);
+        return res.status(StatusCode.OK).json(instanceToPlain(result));
     }
 }

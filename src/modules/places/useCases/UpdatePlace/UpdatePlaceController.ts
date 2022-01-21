@@ -3,6 +3,7 @@ import { StatusCode } from '@shared/helpers/StatusCode';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { UpdatePlaceService } from './UpdatePlaceService';
+import { instanceToPlain } from 'class-transformer';
 
 export class UpdatePlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
@@ -12,6 +13,6 @@ export class UpdatePlaceController {
 
         const result = await updatePlaceService.execute(updatePlaceDTO);
 
-        return res.status(StatusCode.OK).json(result);
+        return res.status(StatusCode.OK).json(instanceToPlain(result));
     }
 }

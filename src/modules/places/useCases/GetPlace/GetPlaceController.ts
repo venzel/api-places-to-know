@@ -3,6 +3,7 @@ import { StatusCode } from '@shared/helpers/StatusCode';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { GetPlaceService } from './GetPlaceService';
+import { instanceToPlain } from 'class-transformer';
 
 export class GetPlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
@@ -12,6 +13,6 @@ export class GetPlaceController {
 
         const result = await showPlaceService.execute(getPlaceDTO.id);
 
-        return res.status(StatusCode.OK).json(result);
+        return res.status(StatusCode.OK).json(instanceToPlain(result));
     }
 }
