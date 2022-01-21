@@ -1,16 +1,16 @@
 import { AppException } from '@shared/exceptions/AppException';
 import { StatusCode } from '@shared/helpers/StatusCode';
 import axios from 'axios';
-import { wordReplaceAccents } from './geralHelper';
+import { normalizeString } from './normalizeStringHelper';
 
 export const unplashService = async (name: string): Promise<any> => {
     const baseUrl = 'https://api.unsplash.com/search/photos';
 
     const clientId = '5vxOyD9gIZLfWXDIg1nFq_bnnGE99yu4OsoI7HweIms';
 
-    const nameReplaceAccents = wordReplaceAccents(name);
+    const stringNormalized = normalizeString(name);
 
-    const url = `${baseUrl}?client_id=${clientId}&query=${nameReplaceAccents}`;
+    const url = `${baseUrl}?client_id=${clientId}&query=${stringNormalized}`;
 
     try {
         const results = await axios.get(url);

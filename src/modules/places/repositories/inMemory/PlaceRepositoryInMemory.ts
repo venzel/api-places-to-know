@@ -12,6 +12,10 @@ export class PlaceRepositoryInMemory implements PlaceRepository {
         this.repository = [];
     }
 
+    async findSomeByTerm(term: string): Promise<Place[]> {
+        throw new Error('Method not implemented.');
+    }
+
     async findOneById(id: string): Promise<Place | undefined> {
         return this.repository.find((place) => place._id === id);
     }

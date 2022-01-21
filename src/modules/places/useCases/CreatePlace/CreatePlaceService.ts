@@ -1,7 +1,7 @@
 import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
 import { ResponsePlaceDTO } from '@modules/places/dtos/ReponsePlaceDTO';
-import { getFirstUrlPhotoUnplash } from '@modules/places/helpers/apiUnplash';
-import { generateTags } from '@modules/places/helpers/geralHelper';
+import { getFirstUrlPhotoUnplash } from '@modules/places/helpers/apiUnplashHelper';
+import { possibleCombinations } from '@modules/places/helpers/combStringHelper';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
 import { AppException } from '@shared/exceptions/AppException';
 import { StatusCode } from '@shared/helpers/StatusCode';
@@ -20,11 +20,11 @@ export class CreatePlaceService {
             throw new AppException(`Place name ${name} already exists!`, StatusCode.CONFLICT);
         }
 
+        const tags = possibleCombinations(name);
+
         const photo = await getFirstUrlPhotoUnplash(name);
 
-        const tags = generateTags(name);
-
-        Object.assign(createPlaceDTO, { photo, tags });
+        Object.assign(createPlaceDTO, { tags, photo });
 
         const schemaCreated = await this.classRepository.create(createPlaceDTO);
 

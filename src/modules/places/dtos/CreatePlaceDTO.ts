@@ -5,7 +5,7 @@ export class CreatePlaceDTO {
     name: string;
 
     @IsOptional()
-    tags?: string;
+    tags?: string[];
 
     @IsOptional()
     photo?: string;

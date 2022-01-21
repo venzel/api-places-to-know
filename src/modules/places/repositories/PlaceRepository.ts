@@ -6,6 +6,8 @@ export interface PlaceRepository {
 
     findOneByName(name: string): Promise<Place | undefined>;
 
+    findSomeByTerm(term: string): Promise<Place[]>;
+
     create(createPlaceDTO: CreatePlaceDTO): Promise<Place>;
 
     save(Placee: Place): Promise<Place>;

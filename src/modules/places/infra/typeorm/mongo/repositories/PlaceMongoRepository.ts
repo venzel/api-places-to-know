@@ -2,7 +2,7 @@ import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
 import { Place } from '@modules/places/schemas/Place';
 import { ObjectID } from 'mongodb';
-import { getMongoRepository, MongoRepository } from 'typeorm';
+import { getMongoRepository, MongoRepository, Like } from 'typeorm';
 import { PlaceMongoSchema } from '../schemas/PlaceMongoSchema';
 
 export class PlaceMongoRepository implements PlaceRepository {
@@ -10,6 +10,14 @@ export class PlaceMongoRepository implements PlaceRepository {
 
     constructor() {
         this.repository = getMongoRepository(PlaceMongoSchema, 'mongodb');
+    }
+
+    async findSomeByTerm(term: string): Promise<Place[]> {
+        return await this.repository.find({
+            where: {
+                tags: { $in: [term] },
+            },
+        });
     }
 
     async findOneById(id: string): Promise<Place | undefined> {

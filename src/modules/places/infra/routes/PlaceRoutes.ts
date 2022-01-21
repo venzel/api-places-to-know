@@ -1,7 +1,7 @@
 import { CreatePlaceMiddleware } from '@modules/places/useCases/CreatePlace/CreatePlaceMiddleware';
 import { DeletePlaceMiddleware } from '@modules/places/useCases/DeletePlace/DeletePlaceMiddleware';
 import { ListPlacesMiddleware } from '@modules/places/useCases/ListPlaces/ListPlacesMiddleware';
-import { ShowPlaceMiddleware } from '@modules/places/useCases/ShowPlace/ShowPlaceMiddleware';
+import { FindPlacesMiddleware } from '@modules/places/useCases/FindPlaces/FindPlacesMiddleware';
 import { UpdatePlaceMiddleware } from '@modules/places/useCases/UpdatePlace/UpdatePlaceMiddleware';
 import { Router } from 'express';
 
@@ -11,10 +11,10 @@ export class PlaceRoutes {
         new CreatePlaceMiddleware().register(router, 'post', '/places');
 
         // List
-        new ListPlacesMiddleware().register(router, 'get', '/places');
+        // new ListPlacesMiddleware().register(router, 'get', '/places');
 
-        // Show
-        new ShowPlaceMiddleware().register(router, 'get', '/places/:id');
+        // Find
+        new FindPlacesMiddleware().register(router, 'get', '/places');
 
         // Delete
         new DeletePlaceMiddleware().register(router, 'delete', '/places/:id');
