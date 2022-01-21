@@ -10,6 +10,9 @@ export class PlaceMongoSchema implements Place {
     name: string;
 
     @Column()
+    tags: string;
+
+    @Column()
     photo: string;
 
     @CreateDateColumn()

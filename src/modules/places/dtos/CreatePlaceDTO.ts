@@ -1,18 +1,20 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreatePlaceDTO {
     @IsNotEmpty({ message: 'Name not empty!' })
     name: string;
 
-    @IsNotEmpty({ message: 'Description not empty!' })
-    photo: string;
+    @IsOptional()
+    tags?: string;
 
-    constructor(name: string, photo: string) {
+    @IsOptional()
+    photo?: string;
+
+    constructor(name: string) {
         this.name = name;
-        this.photo = photo;
     }
 
-    static create(name: string, photo: string) {
-        return new CreatePlaceDTO(name, photo);
+    static create(name: string) {
+        return new CreatePlaceDTO(name);
     }
 }

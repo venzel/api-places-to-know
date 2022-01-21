@@ -1,5 +1,9 @@
 import { Place } from '../schemas/Place';
 
 export interface ResponsePlaceDTO {
-    result: Place;
+    _id: string;
+    name: string;
+    photo: string;
+    date_created: Date;
+    date_updated: Date;
 }
