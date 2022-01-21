@@ -10,6 +10,6 @@ export class GetPlaceDTO {
     }
 
     static create(id: string) {
-        return new GetPlaceDTO(id);
+        return new this(id);
     }
 }

@@ -11,8 +11,8 @@ import { inject, injectable } from 'tsyringe';
 export class UpdatePlaceService {
     constructor(@inject('PlaceRepository') private placeRepository: PlaceRepository) {}
 
-    async execute(updatePlaceDTO: UpdatePlaceDTO, id: string): Promise<ResponsePlaceDTO> {
-        const { name } = updatePlaceDTO;
+    async execute(updatePlaceDTO: UpdatePlaceDTO): Promise<ResponsePlaceDTO> {
+        const { id, name } = updatePlaceDTO;
 
         const existsSchema = await this.placeRepository.findOneById(id);
 

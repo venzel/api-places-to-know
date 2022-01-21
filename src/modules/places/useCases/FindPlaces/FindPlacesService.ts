@@ -1,3 +1,4 @@
+import { FindPlaceDTO } from '@modules/places/dtos/FindPlaceDTO';
 import { ResponsePlaceDTO } from '@modules/places/dtos/ReponsePlaceDTO';
 import { normalizeString } from '@modules/places/helpers/normalizeStringHelper';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
@@ -7,9 +8,13 @@ import { inject, injectable } from 'tsyringe';
 export class FindPlacesService {
     constructor(@inject('PlaceRepository') private placeRepository: PlaceRepository) {}
 
-    async execute(term: string): Promise<ResponsePlaceDTO[]> {
-        const stringNormalized = normalizeString(term.toLowerCase());
+    async execute(findPlaceDTO: FindPlaceDTO): Promise<ResponsePlaceDTO[]> {
+        const { name } = findPlaceDTO;
 
-        return await this.placeRepository.findSomeByTerm(stringNormalized);
+        if (name) {
+            findPlaceDTO.name = normalizeString(name.toLowerCase());
+        }
+
+        return await this.placeRepository.findSomeByFilter(findPlaceDTO);
     }
 }

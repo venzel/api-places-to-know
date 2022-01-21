@@ -2,18 +2,15 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { CreatePlaceService } from './CreatePlaceService';
 import { StatusCode } from '@shared/helpers/StatusCode';
+import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
 
 export class CreatePlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
-        const { name } = req.body;
-
         const createPlaceService = container.resolve(CreatePlaceService);
 
-        const data = {
-            name,
-        };
+        const createPlaceDTO = req.body.createPlaceDTO as CreatePlaceDTO;
 
-        const result = await createPlaceService.execute(data);
+        const result = await createPlaceService.execute(createPlaceDTO);
 
         return res.status(StatusCode.CREATED).json(result);
     }

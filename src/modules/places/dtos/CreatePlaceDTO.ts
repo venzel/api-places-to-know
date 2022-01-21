@@ -5,6 +5,9 @@ export class CreatePlaceDTO {
     name: string;
 
     @IsOptional()
+    slug?: string;
+
+    @IsOptional()
     tags?: string[];
 
     @IsOptional()

@@ -9,6 +9,9 @@ export class PlaceMongoSchema implements Place {
     @Column()
     name: string;
 
+    @Column()
+    slug: string;
+
     @Column({ array: true })
     tags: string[];
 

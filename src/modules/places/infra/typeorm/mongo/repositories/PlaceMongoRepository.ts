@@ -1,8 +1,9 @@
 import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
+import { FindPlaceDTO } from '@modules/places/dtos/FindPlaceDTO';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
 import { Place } from '@modules/places/schemas/Place';
 import { ObjectID } from 'mongodb';
-import { getMongoRepository, MongoRepository, Like } from 'typeorm';
+import { getMongoRepository, MongoRepository } from 'typeorm';
 import { PlaceMongoSchema } from '../schemas/PlaceMongoSchema';
 
 export class PlaceMongoRepository implements PlaceRepository {
@@ -12,11 +13,17 @@ export class PlaceMongoRepository implements PlaceRepository {
         this.repository = getMongoRepository(PlaceMongoSchema, 'mongodb');
     }
 
-    async findSomeByTerm(term: string): Promise<Place[]> {
+    async findSomeByFilter(findPlaceDTO: FindPlaceDTO): Promise<Place[]> {
+        const { name } = findPlaceDTO;
+
+        let where = {};
+
+        if (name !== 'undefined') {
+            Object.assign(where, { tags: { $in: [name] } });
+        }
+
         return await this.repository.find({
-            where: {
-                tags: { $in: [term] },
-            },
+            where,
         });
     }
 
@@ -24,8 +31,8 @@ export class PlaceMongoRepository implements PlaceRepository {
         return await this.repository.findOne({ _id: new ObjectID(id) });
     }
 
-    async findOneByName(name: string): Promise<Place | undefined> {
-        return await this.repository.findOne({ name });
+    async findOneBySlug(slug: string): Promise<Place | undefined> {
+        return await this.repository.findOne({ slug });
     }
 
     async create(createPlaceDTO: CreatePlaceDTO): Promise<Place> {

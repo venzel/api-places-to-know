@@ -6,9 +6,9 @@ import { GetPlaceValidator } from './GetPlaceValidator';
 export class GetPlaceMiddleware {
     public register(router: Router, method: method, path: string): void {
         const { authenticate } = new AuthUserMiddleware();
-        const { handle } = new GetPlaceController();
         const { validate } = new GetPlaceValidator();
+        const { handle } = new GetPlaceController();
 
-        router[method](path, validate, authenticate, handle);
+        router[method](path, authenticate, validate, handle);
     }
 }

@@ -1,4 +1,5 @@
 import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
+import { FindPlaceDTO } from '@modules/places/dtos/FindPlaceDTO';
 import { PlaceInMemory } from '@modules/places/schemas/inMemory/PlaceInMemory';
 import { Place } from '@modules/places/schemas/Place';
 import 'reflect-metadata';
@@ -12,7 +13,7 @@ export class PlaceRepositoryInMemory implements PlaceRepository {
         this.repository = [];
     }
 
-    async findSomeByTerm(term: string): Promise<Place[]> {
+    async findSomeByFilter(findPlaceDTO: FindPlaceDTO): Promise<Place[]> {
         throw new Error('Method not implemented.');
     }
 
@@ -20,8 +21,8 @@ export class PlaceRepositoryInMemory implements PlaceRepository {
         return this.repository.find((place) => place._id === id);
     }
 
-    async findOneByName(name: string): Promise<Place | undefined> {
-        return this.repository.find((place) => place.name === name);
+    async findOneBySlug(slug: string): Promise<Place | undefined> {
+        return this.repository.find((place) => place.slug === slug);
     }
 
     async create(createPlaceDTO: CreatePlaceDTO): Promise<Place> {

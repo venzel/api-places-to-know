@@ -6,9 +6,11 @@ import { NextFunction, Request, Response } from 'express';
 
 export class UpdatePlaceValidator {
     async validate(req: Request, _: Response, next: NextFunction) {
+        const { id } = req.params;
+
         const { name } = req.body;
 
-        const updatePlaceDTO = UpdatePlaceDTO.create(name);
+        const updatePlaceDTO = UpdatePlaceDTO.update(id, name);
 
         const existsErrors = await validate(updatePlaceDTO);
 
@@ -17,6 +19,8 @@ export class UpdatePlaceValidator {
 
             throw new AppException(`Fields: ${fields}`, StatusCode.BAD_REQUEST);
         }
+
+        Object.assign(req.body, { updatePlaceDTO });
 
         return next();
     }

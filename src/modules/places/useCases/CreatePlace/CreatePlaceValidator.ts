@@ -18,6 +18,8 @@ export class CreatePlaceValidator {
             throw new AppException(`Fields: ${fields}`, StatusCode.BAD_REQUEST);
         }
 
+        Object.assign(req.body, { createPlaceDTO });
+
         return next();
     }
 }

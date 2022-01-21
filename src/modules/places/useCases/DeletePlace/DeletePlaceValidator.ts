@@ -4,7 +4,7 @@ import { StatusCode } from '@shared/helpers/StatusCode';
 import { validate } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
 
-export class GetPlaceValidator {
+export class DeletePlaceValidator {
     async validate(req: Request, _: Response, next: NextFunction) {
         const { id } = req.params;
 
