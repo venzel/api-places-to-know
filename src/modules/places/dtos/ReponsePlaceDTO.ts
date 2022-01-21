@@ -1,5 +1,3 @@
-import { Place } from '../schemas/Place';
-
 export interface ResponsePlaceDTO {
     _id: string;
     name: string;
