@@ -9,9 +9,9 @@ export class FindPlacesController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const findPlacesService = container.resolve(FindPlacesService);
 
-        const findPlaceDTO = req.body.findPlaceDTO as FindPlaceDTO;
+        const bodyContext: FindPlaceDTO = req.body.findPlaceDTO;
 
-        let results = await findPlacesService.execute(findPlaceDTO);
+        let results = await findPlacesService.execute(bodyContext);
 
         return res.status(StatusCode.OK).json(instanceToPlain(results));
     }

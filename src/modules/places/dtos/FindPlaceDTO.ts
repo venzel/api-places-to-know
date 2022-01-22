@@ -1,15 +1,18 @@
 import { IsOptional, MaxLength } from 'class-validator';
+import { FindBasePlaceDTO } from './FindBasePlaceDTO';
 
-export class FindPlaceDTO {
+export class FindPlaceDTO extends FindBasePlaceDTO {
     @IsOptional()
-    @MaxLength(12, { message: 'Nome áximo de 12 caractares!' })
-    name?: string;
+    @MaxLength(20, { message: 'Search: máximo de 20 caractares!' })
+    search?: string;
 
-    constructor(name: string) {
-        this.name = name;
+    constructor(page: number, limit: number, search: string, order: string) {
+        super(page, limit, order);
+
+        this.search = search;
     }
 
-    static create(name: string) {
-        return new this(name);
+    static create(page: number, limit: number, search: string, order: string) {
+        return new this(page, limit, search, order);
     }
 }

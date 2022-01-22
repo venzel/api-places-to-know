@@ -14,16 +14,34 @@ export class PlaceMongoRepository implements PlaceRepository {
     }
 
     async findSomeByFilter(findPlaceDTO: FindPlaceDTO): Promise<Place[]> {
-        const { name } = findPlaceDTO;
+        let { page, limit, search, order: order_ } = findPlaceDTO;
 
-        let where = {};
+        page = !page || page < 1 ? 1 : page;
+        limit = !limit ? 5 : limit;
 
-        if (name !== 'undefined') {
-            Object.assign(where, { tags: { $in: [name] } });
+        const where = {};
+        const order = {};
+
+        if (search !== 'undefined') {
+            Object.assign(where, { tags: { $in: [search] } });
+        }
+
+        const orders: any = {
+            name: { name: 'ASC' },
+            slug: { slug: 'ASC' },
+        };
+
+        const existsProperty = orders.hasOwnProperty(order_);
+
+        if (order_ !== 'undefined' && existsProperty) {
+            Object.assign(order, orders[order_]);
         }
 
         return await this.repository.find({
             where,
+            order,
+            take: limit,
+            skip: (page - 1) * limit,
         });
     }
 

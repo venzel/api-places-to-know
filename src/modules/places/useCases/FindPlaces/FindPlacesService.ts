@@ -9,10 +9,10 @@ export class FindPlacesService {
     constructor(@inject('PlaceRepository') private placeRepository: PlaceRepository) {}
 
     async execute(findPlaceDTO: FindPlaceDTO): Promise<ResponsePlaceDTO[]> {
-        const { name } = findPlaceDTO;
+        const { search } = findPlaceDTO;
 
-        if (name) {
-            findPlaceDTO.name = normalizeString(name.toLowerCase());
+        if (search) {
+            findPlaceDTO.search = normalizeString(search.toLowerCase());
         }
 
         return await this.placeRepository.findSomeByFilter(findPlaceDTO);

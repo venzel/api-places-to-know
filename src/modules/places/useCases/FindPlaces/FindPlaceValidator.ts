@@ -6,9 +6,14 @@ import { NextFunction, Request, Response } from 'express';
 
 export class FindPlaceValidator {
     async validate(req: Request, _: Response, next: NextFunction) {
-        const { name } = req.query;
+        let { page, limit, search, order } = req.query;
 
-        const findPlaceDTO = FindPlaceDTO.create(String(name));
+        const queryPage = !page ? 1 : Number(page);
+        const queryLimit = !limit ? 50 : Number(limit);
+        const querySearch = !search ? 'undefined' : String(search);
+        const queryOrder = !order ? 'undefined' : String(order);
+
+        const findPlaceDTO = FindPlaceDTO.create(queryPage, queryLimit, querySearch, queryOrder);
 
         const existsErrors = await validate(findPlaceDTO);
 
