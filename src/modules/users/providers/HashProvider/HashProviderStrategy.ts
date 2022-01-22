@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 import { BcryptHashProvider } from './implements/BcryptHashProvider';
-import { HashProvider } from './models/HashProvider';
+import { HashProvider } from './HashProvider';
 
 export class HashProviderStrategy {
     private strategies: any = {};

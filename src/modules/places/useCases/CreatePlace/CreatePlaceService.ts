@@ -1,16 +1,19 @@
 import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
 import { ResponsePlaceDTO } from '@modules/places/dtos/ReponsePlaceDTO';
-import { getFirstUrlPhotoUnplash } from '@modules/places/helpers/apiUnplashHelper';
 import { possibleCombinations } from '@modules/places/helpers/combStringHelper';
-import { normalizeString } from '@modules/places/helpers/normalizeStringHelper';
+import { PhotoStockProvider } from '@modules/places/providers/PhotoStock/PhotoStockProvider';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
 import { AppException } from '@shared/exceptions/AppException';
+import { normalizeString } from '@shared/helpers/normalizeStringHelper';
 import { StatusCode } from '@shared/helpers/StatusCode';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export class CreatePlaceService {
-    constructor(@inject('PlaceRepository') private classRepository: PlaceRepository) {}
+    constructor(
+        @inject('PlaceRepository') private classRepository: PlaceRepository,
+        @inject('PhotoStockProvider') private photoStockProvider: PhotoStockProvider
+    ) {}
 
     async execute(createPlaceDTO: CreatePlaceDTO): Promise<ResponsePlaceDTO> {
         const { name } = createPlaceDTO;
@@ -25,7 +28,7 @@ export class CreatePlaceService {
 
         const tags = possibleCombinations(name);
 
-        const photo = await getFirstUrlPhotoUnplash(name);
+        const photo = await this.photoStockProvider.getUrlPhoto(name);
 
         Object.assign(createPlaceDTO, { slug, tags, photo });
 

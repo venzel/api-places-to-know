@@ -1,7 +1,7 @@
 import { AppException } from '@shared/exceptions/AppException';
 import { NextFunction, Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { TokenProvider } from '../providers/TokenProvider/models/TokenProvider';
+import { TokenProvider } from '../providers/TokenProvider/TokenProvider';
 
 export class AuthUserMiddleware {
     public authenticate(req: Request, _: Response, next: NextFunction): any {

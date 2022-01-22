@@ -1,4 +1,4 @@
-import { normalizeString } from './normalizeStringHelper';
+import { normalizeString } from '../../../shared/helpers/normalizeStringHelper';
 
 export const possibleCombinations = (str: string) => {
     str = normalizeString(str.toLowerCase());

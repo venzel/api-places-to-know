@@ -1,9 +1,8 @@
 import { container } from 'tsyringe';
+import { UnPlashProvider } from './implements/UnPlashProvider';
+import { PhotoStockProvider } from './PhotoStockProvider';
 
-import { TokenProvider } from './TokenProvider';
-import { JWTTokenProvider } from './implements/JWTTokenProvider';
-
-class TokenProviderStrategy {
+export class PhotoStockProviderStrategy {
     private strategies: any = {};
 
     constructor() {
@@ -11,7 +10,7 @@ class TokenProviderStrategy {
     }
 
     initStrategies(): void {
-        this.strategies['jwt'] = () => JWTTokenProvider;
+        this.strategies['unplash'] = () => UnPlashProvider;
     }
 
     setStrategy(service: string): void {
@@ -21,8 +20,6 @@ class TokenProviderStrategy {
             throw new Error('Service provider not found in strategies!');
         }
 
-        container.registerSingleton<TokenProvider>('TokenProvider', this.strategies[service]());
+        container.registerSingleton<PhotoStockProvider>('PhotoStockProvider', this.strategies[service]());
     }
 }
-
-export { TokenProviderStrategy };

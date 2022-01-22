@@ -4,7 +4,7 @@ import { PayloadDTO } from '@modules/users/dtos/PayloadDTO';
 import { AppException } from '@shared/exceptions/AppException';
 import { StatusCode } from '@shared/helpers/StatusCode';
 import { sign, verify } from 'jsonwebtoken';
-import { TokenProvider } from '../models/TokenProvider';
+import { TokenProvider } from '../TokenProvider';
 
 class JWTTokenProvider implements TokenProvider {
     async generateToken(createPayloadDTO: CreatePayloadDTO): Promise<string> {

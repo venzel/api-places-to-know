@@ -1,7 +1,7 @@
 import { FindPlaceDTO } from '@modules/places/dtos/FindPlaceDTO';
 import { ResponsePlaceDTO } from '@modules/places/dtos/ReponsePlaceDTO';
-import { normalizeString } from '@modules/places/helpers/normalizeStringHelper';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
+import { normalizeString } from '@shared/helpers/normalizeStringHelper';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

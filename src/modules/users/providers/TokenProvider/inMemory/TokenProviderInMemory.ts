@@ -1,7 +1,7 @@
 import { CreatePayloadDTO } from '@modules/users/dtos/CreatePayloadDTO';
 import { PayloadDTO } from '@modules/users/dtos/PayloadDTO';
 import { randomBytes } from 'crypto';
-import { TokenProvider } from '../models/TokenProvider';
+import { TokenProvider } from '../TokenProvider';
 
 export class TokenProviderInMemory implements TokenProvider {
     async generateToken(data: CreatePayloadDTO): Promise<string> {

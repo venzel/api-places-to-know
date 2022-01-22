@@ -1,7 +1,7 @@
 import { HashProviderInMemory } from '@modules/users/providers/HashProvider/inMemory/HashProviderInMemory';
-import { HashProvider } from '@modules/users/providers/HashProvider/models/HashProvider';
+import { HashProvider } from '@modules/users/providers/HashProvider/HashProvider';
 import { TokenProviderInMemory } from '@modules/users/providers/TokenProvider/inMemory/TokenProviderInMemory';
-import { TokenProvider } from '@modules/users/providers/TokenProvider/models/TokenProvider';
+import { TokenProvider } from '@modules/users/providers/TokenProvider/TokenProvider';
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory';
 import { UserRepository } from '@modules/users/repositories/UserRepository';
 import { AppException } from '@shared/exceptions/AppException';

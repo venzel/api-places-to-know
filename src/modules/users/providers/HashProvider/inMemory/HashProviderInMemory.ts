@@ -1,4 +1,4 @@
-import { HashProvider } from '../models/HashProvider';
+import { HashProvider } from '../HashProvider';
 
 class HashProviderInMemory implements HashProvider {
     async gererateHash(payload: string): Promise<string> {
