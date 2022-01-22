@@ -6,10 +6,14 @@ export class HashProviderStrategy {
     private strategies: any = {};
 
     constructor() {
+        this.initStrategies();
+    }
+
+    initStrategies(): void {
         this.strategies['bcrypt'] = () => BcryptHashProvider;
     }
 
-    public setStrategy(service: string): void {
+    setStrategy(service: string): void {
         const existsStrategy = this.strategies.hasOwnProperty(service);
 
         if (!existsStrategy) {

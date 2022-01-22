@@ -4,11 +4,11 @@ import { randomBytes } from 'crypto';
 import { TokenProvider } from '../models/TokenProvider';
 
 export class TokenProviderInMemory implements TokenProvider {
-    public async generateToken(data: CreatePayloadDTO): Promise<string> {
+    async generateToken(data: CreatePayloadDTO): Promise<string> {
         return randomBytes(8).toString('hex');
     }
 
-    public validateToken(_: string): PayloadDTO {
+    validateToken(_: string): PayloadDTO {
         const id: string = randomBytes(2).toString('hex');
 
         return {
