@@ -9,9 +9,9 @@ export class GetPlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const showPlaceService = container.resolve(GetPlaceService);
 
-        const getPlaceDTO = req.body.getPlaceDTO as GetPlaceDTO;
+        const bodyContext: GetPlaceDTO = req.body.getPlaceDTO;
 
-        const result = await showPlaceService.execute(getPlaceDTO.id);
+        const result = await showPlaceService.execute(bodyContext.id);
 
         return res.status(StatusCode.OK).json(instanceToPlain(result));
     }

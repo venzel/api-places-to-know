@@ -9,9 +9,9 @@ export class DeletePlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const deletePlaceService = container.resolve(DeletePlaceService);
 
-        const getPlaceDTO = req.body.getPlaceDTO as GetPlaceDTO;
+        const bodyContext: GetPlaceDTO = req.body.getPlaceDTO;
 
-        const result = await deletePlaceService.execute(getPlaceDTO.id);
+        const result = await deletePlaceService.execute(bodyContext.id);
 
         return res.status(StatusCode.OK).json(instanceToPlain(result));
     }

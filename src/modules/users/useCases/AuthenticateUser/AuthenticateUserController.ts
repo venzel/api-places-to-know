@@ -8,9 +8,9 @@ export class AuthenticateUserController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const authenticateUserService = container.resolve(AuthenticateUserService);
 
-        const authenticateUserDTO = req.body.authenticateUserDTO as AuthenticateUserDTO;
+        const bodyContext: AuthenticateUserDTO = req.body.authenticateUserDTO;
 
-        const token = await authenticateUserService.execute(authenticateUserDTO);
+        const token = await authenticateUserService.execute(bodyContext);
 
         return res.status(StatusCode.OK).json(token);
     }

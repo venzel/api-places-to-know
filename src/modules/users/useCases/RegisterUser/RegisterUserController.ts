@@ -9,9 +9,9 @@ export class RegisterUserController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const service = container.resolve(RegisterUserService);
 
-        const createUserDTO = req.body.createUserDTO as CreateUserDTO;
+        const bodyContext: CreateUserDTO = req.body.createUserDTO;
 
-        const result = await service.execute(createUserDTO);
+        const result = await service.execute(bodyContext);
 
         return res.status(StatusCode.CREATED).json(instanceToPlain(result));
     }

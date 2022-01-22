@@ -9,9 +9,9 @@ export class UpdatePlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const updatePlaceService = container.resolve(UpdatePlaceService);
 
-        const updatePlaceDTO = req.body.updatePlaceDTO as UpdatePlaceDTO;
+        const bodyContext: UpdatePlaceDTO = req.body.updatePlaceDTO;
 
-        const result = await updatePlaceService.execute(updatePlaceDTO);
+        const result = await updatePlaceService.execute(bodyContext);
 
         return res.status(StatusCode.OK).json(instanceToPlain(result));
     }

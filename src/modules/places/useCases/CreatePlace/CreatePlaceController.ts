@@ -9,9 +9,9 @@ export class CreatePlaceController {
     public async handle(req: Request, res: Response): Promise<Response> {
         const createPlaceService = container.resolve(CreatePlaceService);
 
-        const createPlaceDTO = req.body.createPlaceDTO as CreatePlaceDTO;
+        const bodyContext: CreatePlaceDTO = req.body.createPlaceDTO;
 
-        const result = await createPlaceService.execute(createPlaceDTO);
+        const result = await createPlaceService.execute(bodyContext);
 
         return res.status(StatusCode.CREATED).json(instanceToPlain(result));
     }
