@@ -11,9 +11,9 @@ export interface PlaceRepository {
 
     create(createPlaceDTO: CreatePlaceDTO): Promise<Place>;
 
-    save(Placee: Place): Promise<Place>;
+    save(place: Place): Promise<Place>;
 
     list(): Promise<Place[]>;
 
-    delete(Placee: Place): Promise<Place>;
+    delete(place: Place): Promise<Place>;
 }
