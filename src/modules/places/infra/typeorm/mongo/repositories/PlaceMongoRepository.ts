@@ -78,4 +78,8 @@ export class PlaceMongoRepository implements PlaceRepository {
 
         return place;
     }
+
+    async deleteAll(): Promise<any> {
+        await this.repository.delete({});
+    }
 }

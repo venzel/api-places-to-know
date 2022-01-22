@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
 import { FindPlaceDTO } from '@modules/places/dtos/FindPlaceDTO';
 import { generateStringCombinatios } from '@modules/places/helpers/combStringHelper';
@@ -5,7 +6,6 @@ import { PlaceInMemory } from '@modules/places/schemas/inMemory/PlaceInMemory';
 import { Place } from '@modules/places/schemas/Place';
 import { normalizeString } from '@shared/helpers/normalizeStringHelper';
 import { ObjectID } from 'mongodb';
-import 'reflect-metadata';
 import { PlaceRepository } from '../PlaceRepository';
 
 export class PlaceRepositoryInMemory implements PlaceRepository {
@@ -100,5 +100,9 @@ export class PlaceRepositoryInMemory implements PlaceRepository {
         }
 
         return place;
+    }
+
+    async deleteAll(): Promise<any> {
+        this.repository = [];
     }
 }

@@ -16,4 +16,6 @@ export interface PlaceRepository {
     list(): Promise<Place[]>;
 
     delete(place: Place): Promise<Place>;
+
+    deleteAll(): Promise<any>;
 }

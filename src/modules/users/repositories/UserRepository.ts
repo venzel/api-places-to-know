@@ -7,4 +7,6 @@ export interface UserRepository {
     findOneByEmail(email: string): Promise<User | undefined>;
 
     create(createUserDTO: CreateUserDTO): Promise<User>;
+
+    deleteAll(): Promise<void>;
 }

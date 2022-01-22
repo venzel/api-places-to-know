@@ -26,4 +26,8 @@ export class UserMongoRepository implements UserRepository {
 
         return schemaCreated;
     }
+
+    async deleteAll(): Promise<any> {
+        await this.repository.delete({});
+    }
 }
