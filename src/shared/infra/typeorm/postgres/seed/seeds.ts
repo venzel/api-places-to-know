@@ -12,6 +12,9 @@ import { users } from '../../data/users';
 
 const userContext = async () => {
     const userRepository = new UserMongoRepository();
+
+    await userRepository.deleteAll();
+
     const hashProvider = new BcryptHashProvider();
     const tokenProvider = new JWTTokenProvider();
     const registerUserService = new RegisterUserService(userRepository, hashProvider, tokenProvider);
@@ -23,6 +26,9 @@ const userContext = async () => {
 
 const placeContext = async () => {
     const placeRepository = new PlaceMongoRepository();
+
+    await placeRepository.deleteAll();
+
     const photoStokProvider = new UnPlashProvider();
     const createPlaceService = new CreatePlaceService(placeRepository, photoStokProvider);
 
