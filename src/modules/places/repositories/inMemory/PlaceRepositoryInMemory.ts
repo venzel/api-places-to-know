@@ -24,11 +24,13 @@ export class PlaceRepositoryInMemory implements PlaceRepository {
     }
 
     async findSomeByFilter(findPlaceDTO: FindPlaceDTO): Promise<Place[]> {
-        const { search } = findPlaceDTO;
+        const { search, limit, order } = findPlaceDTO;
 
-        const places: Place[] = [];
+        let places: Place[] = this.repository;
 
         if (search) {
+            places = [];
+
             const searchNormalized = normalizeString(search);
 
             this.repository.forEach((e) => {
@@ -36,11 +38,24 @@ export class PlaceRepositoryInMemory implements PlaceRepository {
                     places.push(e);
                 }
             });
-
-            return places;
         }
 
-        return this.repository;
+        if (limit) {
+            places = places.slice(0, limit);
+        }
+
+        if (order) {
+            const compare = (placeA: Place, placeB: Place): number => {
+                const a = placeA.slug.toLowerCase();
+                const b = placeB.slug.toLowerCase();
+
+                return a === b ? 0 : a > b ? 1 : -1;
+            };
+
+            places.sort(compare);
+        }
+
+        return places;
     }
 
     async create(createPlaceDTO: CreatePlaceDTO): Promise<Place> {

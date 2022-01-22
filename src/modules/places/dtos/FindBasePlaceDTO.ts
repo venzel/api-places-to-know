@@ -11,7 +11,7 @@ export class FindBasePlaceDTO {
 
     @IsOptional()
     @MaxLength(20, { message: 'Order: máximo de 20 caractares!' })
-    order: string;
+    order?: string;
 
     constructor(page: number, limit: number, order: string) {
         this.page = page;

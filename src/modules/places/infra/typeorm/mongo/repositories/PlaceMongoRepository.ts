@@ -33,7 +33,7 @@ export class PlaceMongoRepository implements PlaceRepository {
 
         const existsProperty = orders.hasOwnProperty(order_);
 
-        if (order_ !== 'undefined' && existsProperty) {
+        if (order_ && order_ !== 'undefined' && existsProperty) {
             Object.assign(order, orders[order_]);
         }
 
