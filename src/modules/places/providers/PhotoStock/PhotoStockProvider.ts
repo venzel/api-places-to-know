@@ -1,3 +1,3 @@
 export interface PhotoStockProvider {
-    getUrlPhoto(photoName: string): Promise<string | undefined>;
+    getUrlPhoto(photoName: string): Promise<string>;
 }

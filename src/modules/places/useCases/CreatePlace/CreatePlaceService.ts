@@ -1,6 +1,6 @@
 import { CreatePlaceDTO } from '@modules/places/dtos/CreatePlaceDTO';
 import { ResponsePlaceDTO } from '@modules/places/dtos/ReponsePlaceDTO';
-import { possibleCombinations } from '@modules/places/helpers/combStringHelper';
+import { generateStringCombinatios } from '@modules/places/helpers/combStringHelper';
 import { PhotoStockProvider } from '@modules/places/providers/PhotoStock/PhotoStockProvider';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
 import { AppException } from '@shared/exceptions/AppException';
@@ -26,7 +26,7 @@ export class CreatePlaceService {
             throw new AppException(`Place name ${name} already exists!`, StatusCode.CONFLICT);
         }
 
-        const tags = possibleCombinations(name);
+        const tags = generateStringCombinatios(name);
 
         const photo = await this.photoStockProvider.getUrlPhoto(name);
 

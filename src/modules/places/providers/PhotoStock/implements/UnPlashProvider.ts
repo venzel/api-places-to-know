@@ -23,7 +23,7 @@ export class UnPlashProvider implements PhotoStockProvider {
         }
     }
 
-    async getUrlPhoto(photoName: string): Promise<string | undefined> {
+    async getUrlPhoto(photoName: string): Promise<string> {
         const dataPhotos = await this.processServiceUnPlash(photoName);
 
         const firstDataPhoto = dataPhotos[0];

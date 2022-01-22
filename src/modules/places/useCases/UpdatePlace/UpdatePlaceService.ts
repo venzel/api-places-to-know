@@ -1,6 +1,6 @@
 import { ResponsePlaceDTO } from '@modules/places/dtos/ReponsePlaceDTO';
 import { UpdatePlaceDTO } from '@modules/places/dtos/UpdatePlaceDTO';
-import { possibleCombinations } from '@modules/places/helpers/combStringHelper';
+import { generateStringCombinatios } from '@modules/places/helpers/combStringHelper';
 import { PhotoStockProvider } from '@modules/places/providers/PhotoStock/PhotoStockProvider';
 import { PlaceRepository } from '@modules/places/repositories/PlaceRepository';
 import { AppException } from '@shared/exceptions/AppException';
@@ -26,7 +26,7 @@ export class UpdatePlaceService {
         if (existsSchema.name !== name) {
             updatePlaceDTO.photo = await this.photoStockProvider.getUrlPhoto(name);
 
-            updatePlaceDTO.tags = possibleCombinations(name);
+            updatePlaceDTO.tags = generateStringCombinatios(name);
         }
 
         Object.assign(existsSchema, updatePlaceDTO);

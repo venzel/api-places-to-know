@@ -34,6 +34,8 @@ describe('RegisterUserService', () => {
 
         expect(generateHash).toHaveBeenCalledWith('penadepato');
 
+        // expect(generateToken).toHaveBeenCalledWith({ _id: user._id, email: user.email });
+
         expect(user).toHaveProperty('_id');
     });
 
@@ -42,17 +44,19 @@ describe('RegisterUserService', () => {
     it('should be not register a new user', async () => {
         registerUserService = new RegisterUserService(userRepository, hashProvider, tokenProvider);
 
+        const emailToFailGenerate = 'tiago@gmail.com';
+
         await registerUserService.execute({
             name: 'tiago',
-            email: 'tiago@gmail.com',
-            password: 'penadepato',
+            email: emailToFailGenerate,
+            password: 'P3nadetubarao',
         });
 
         await expect(
             registerUserService.execute({
                 name: 'tiago',
-                email: 'tiago@gmail.com',
-                password: 'penadepato',
+                email: emailToFailGenerate,
+                password: 'P3nadetubarao',
             })
         ).rejects.toBeInstanceOf(AppException);
     });

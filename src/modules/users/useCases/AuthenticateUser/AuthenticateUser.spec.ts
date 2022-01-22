@@ -43,9 +43,11 @@ describe('AuthenticateUserService', () => {
     // TEST 2
 
     it('should not be authenticate', async () => {
+        const passwordToFailGenerate = 'tiagoNAOTEMemail@gmail.com';
+
         await expect(
             authenticateUserService.execute({
-                email: 'tiagoNAOTEMemail@gmail.com',
+                email: passwordToFailGenerate,
                 password: 'penadepato',
             })
         ).rejects.toBeInstanceOf(AppException);
@@ -60,10 +62,12 @@ describe('AuthenticateUserService', () => {
             password: 'penadepato',
         });
 
+        const passwordToFailGenerate = 'galinhaverde';
+
         await expect(
             authenticateUserService.execute({
                 email: 'tiago@gmail.com',
-                password: 'passwordincorrect',
+                password: passwordToFailGenerate,
             })
         ).rejects.toBeInstanceOf(AppException);
     });

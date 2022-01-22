@@ -1,5 +1,6 @@
 import { FindPlaceDTO } from '@modules/places/dtos/FindPlaceDTO';
 import { AppException } from '@shared/exceptions/AppException';
+import { normalizeString } from '@shared/helpers/normalizeStringHelper';
 import { StatusCode } from '@shared/helpers/StatusCode';
 import { validate } from 'class-validator';
 import { NextFunction, Request, Response } from 'express';
@@ -10,7 +11,7 @@ export class FindPlaceValidator {
 
         const queryPage = !page ? 1 : Number(page);
         const queryLimit = !limit ? 50 : Number(limit);
-        const querySearch = !search ? 'undefined' : String(search);
+        const querySearch = !search ? 'undefined' : normalizeString(String(search));
         const queryOrder = !order ? 'undefined' : String(order);
 
         const findPlaceDTO = FindPlaceDTO.create(queryPage, queryLimit, querySearch, queryOrder);

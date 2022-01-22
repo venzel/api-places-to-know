@@ -1,7 +1,7 @@
 import { normalizeString } from '../../../shared/helpers/normalizeStringHelper';
 
-export const possibleCombinations = (str: string) => {
-    str = normalizeString(str.toLowerCase());
+export const generateStringCombinatios = (str: string) => {
+    str = normalizeString(str);
 
     const combinations = [];
 
@@ -19,7 +19,7 @@ export const possibleCombinations = (str: string) => {
     return uniqueCombinations;
 };
 
-export function possibleAdvancedCombinations(str: string) {
+export function generateStringCombinatiosAdvanced(str: string) {
     let lenStr = str.length;
 
     let result: string[] = [];
