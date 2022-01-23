@@ -8,6 +8,8 @@
             "email": "eneas.eng@yahoo.com"
         }
     },
+    "host": "http://143.198.112.106:3021",
+    "basePath": "./",
     "paths": {
         "/login": {
             "post": {
