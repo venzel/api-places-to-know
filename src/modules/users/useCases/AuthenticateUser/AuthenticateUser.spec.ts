@@ -23,8 +23,8 @@ describe('AuthenticateUserService', () => {
     // TEST 1
 
     it('should be authenticate a new user', async () => {
-        jest.spyOn(hashProvider, 'gererateHash');
-        jest.spyOn(tokenProvider, 'generateToken');
+        const compareHash = jest.spyOn(hashProvider, 'compareHash');
+        const generateToken = jest.spyOn(tokenProvider, 'generateToken');
 
         await userRepository.create({
             name: 'Tiago',
@@ -38,6 +38,8 @@ describe('AuthenticateUserService', () => {
         });
 
         expect(user).toHaveProperty('token');
+        expect(compareHash).toHaveBeenCalled();
+        expect(generateToken).toHaveBeenCalled();
     });
 
     // TEST 2

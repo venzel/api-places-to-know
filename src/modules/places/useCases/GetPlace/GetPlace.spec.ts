@@ -16,7 +16,7 @@ describe('GetPlaceService', () => {
 
     it('should be get a place', async () => {
         const placeCreated = await placeRepository.create({
-            name: 'Gato',
+            name: 'França',
         });
 
         const placeGet = await getPlaceService.execute(placeCreated._id);
