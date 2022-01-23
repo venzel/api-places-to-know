@@ -16,7 +16,7 @@ describe('DeletePlaceService', () => {
 
     it('should be delete a place', async () => {
         const placeCreated = await placeRepository.create({
-            name: 'Gato',
+            name: 'Paris',
         });
 
         const placeDeleted = await deletePlaceService.execute(placeCreated._id);

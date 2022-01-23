@@ -19,22 +19,20 @@ describe('UpdatePlaceService', () => {
     // TEST 1
 
     it('should be update a place', async () => {
-        const placeCreated = await placeRepository.create({
-            name: 'Gato',
-        });
-
         const getUrlPhoto = jest.spyOn(photoStockProvider, 'getUrlPhoto');
+
+        const placeCreated = await placeRepository.create({
+            name: 'Bolívia',
+        });
 
         const placeUpated = await updatePlaceService.execute({
             id: placeCreated._id,
-            name: 'cachorro',
+            name: 'uruguai',
         });
 
-        expect(getUrlPhoto).toHaveBeenCalledWith('cachorro');
-
         expect(placeUpated).toHaveProperty('_id');
-
-        expect(placeUpated.name).toBe('cachorro');
+        expect(placeUpated.name).toBe('uruguai');
+        expect(getUrlPhoto).toHaveBeenCalledWith('uruguai');
     });
 
     // // TEST 2
@@ -45,7 +43,7 @@ describe('UpdatePlaceService', () => {
         await expect(
             updatePlaceService.execute({
                 id: idToFailGenerate,
-                name: 'cachorro',
+                name: 'Uruguai',
             })
         ).rejects.toBeInstanceOf(AppException);
     });
