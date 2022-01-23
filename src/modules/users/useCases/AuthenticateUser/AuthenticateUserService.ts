@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { AuthenticateUserDTO } from '@modules/users/dtos/AuthenticateUserDTO';
 import { ResponseUserTokenDTO } from '@modules/users/dtos/ResponseUserTokenDTO';
-import { HashProvider } from '@modules/users/providers/HashProvider/models/HashProvider';
-import { TokenProvider } from '@modules/users/providers/TokenProvider/models/TokenProvider';
+import { HashProvider } from '@modules/users/providers/HashProvider/HashProvider';
+import { TokenProvider } from '@modules/users/providers/TokenProvider/TokenProvider';
 import { UserRepository } from '@modules/users/repositories/UserRepository';
 import { AppException } from '@shared/exceptions/AppException';
 import { StatusCode } from '@shared/helpers/StatusCode';

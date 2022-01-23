@@ -1,14 +1,16 @@
-import { environment } from '@configs/geral';
-import { sentry_dsn } from '@configs/sentry';
+import express, { Express } from 'express';
+import 'express-async-errors';
+import swagger from 'swagger-ui-express';
 import * as Sentry from '@sentry/node';
 import '@shared/containers';
 import cors from 'cors';
-import express, { Express } from 'express';
-import 'express-async-errors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { exception } from './Exception';
 import { route } from './Route';
+import { environment } from '@configs/geral';
+import { sentry_dsn } from '@configs/sentry';
+import swagerJson from '../../../../swagger.json';
 
 class Middleware {
     public use(app: Express): void {
@@ -27,6 +29,8 @@ class Middleware {
         app.use(express.urlencoded({ extended: true }));
 
         app.use(express.json());
+
+        app.use('/api-docs', swagger.serve, swagger.setup(swagerJson));
 
         app.use(route.execute());
 

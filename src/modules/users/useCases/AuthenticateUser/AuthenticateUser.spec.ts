@@ -1,7 +1,7 @@
 import { HashProviderInMemory } from '@modules/users/providers/HashProvider/inMemory/HashProviderInMemory';
-import { HashProvider } from '@modules/users/providers/HashProvider/models/HashProvider';
+import { HashProvider } from '@modules/users/providers/HashProvider/HashProvider';
 import { TokenProviderInMemory } from '@modules/users/providers/TokenProvider/inMemory/TokenProviderInMemory';
-import { TokenProvider } from '@modules/users/providers/TokenProvider/models/TokenProvider';
+import { TokenProvider } from '@modules/users/providers/TokenProvider/TokenProvider';
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory';
 import { UserRepository } from '@modules/users/repositories/UserRepository';
 import { AppException } from '@shared/exceptions/AppException';
@@ -23,8 +23,8 @@ describe('AuthenticateUserService', () => {
     // TEST 1
 
     it('should be authenticate a new user', async () => {
-        jest.spyOn(hashProvider, 'gererateHash');
-        jest.spyOn(tokenProvider, 'generateToken');
+        const compareHash = jest.spyOn(hashProvider, 'compareHash');
+        const generateToken = jest.spyOn(tokenProvider, 'generateToken');
 
         await userRepository.create({
             name: 'Tiago',
@@ -38,14 +38,18 @@ describe('AuthenticateUserService', () => {
         });
 
         expect(user).toHaveProperty('token');
+        expect(compareHash).toHaveBeenCalled();
+        expect(generateToken).toHaveBeenCalled();
     });
 
     // TEST 2
 
     it('should not be authenticate', async () => {
+        const passwordToFailGenerate = 'tiagoNAOTEMemail@gmail.com';
+
         await expect(
             authenticateUserService.execute({
-                email: 'tiagoNAOTEMemail@gmail.com',
+                email: passwordToFailGenerate,
                 password: 'penadepato',
             })
         ).rejects.toBeInstanceOf(AppException);
@@ -60,10 +64,12 @@ describe('AuthenticateUserService', () => {
             password: 'penadepato',
         });
 
+        const passwordToFailGenerate = 'galinhaverde';
+
         await expect(
             authenticateUserService.execute({
                 email: 'tiago@gmail.com',
-                password: 'passwordincorrect',
+                password: passwordToFailGenerate,
             })
         ).rejects.toBeInstanceOf(AppException);
     });

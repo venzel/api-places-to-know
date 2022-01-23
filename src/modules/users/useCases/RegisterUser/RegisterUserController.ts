@@ -1,22 +1,18 @@
-import { container } from 'tsyringe';
-import { Request, Response } from 'express';
-import { RegisterUserService } from './RegisterUserService';
+import { CreateUserDTO } from '@modules/users/dtos/CreateUserDTO';
 import { StatusCode } from '@shared/helpers/StatusCode';
+import { instanceToPlain } from 'class-transformer';
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import { RegisterUserService } from './RegisterUserService';
 
 export class RegisterUserController {
     public async handle(req: Request, res: Response): Promise<Response> {
-        const { name, email, password } = req.body;
-
         const service = container.resolve(RegisterUserService);
 
-        const data = {
-            name,
-            email,
-            password,
-        };
+        const bodyContext: CreateUserDTO = req.body.createUserDTO;
 
-        const user = await service.execute(data);
+        const result = await service.execute(bodyContext);
 
-        return res.status(StatusCode.CREATED).json({ user });
+        return res.status(StatusCode.CREATED).json(instanceToPlain(result));
     }
 }

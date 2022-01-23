@@ -1,6 +1,6 @@
 import { Errback, Request, Response, NextFunction } from 'express';
 import Youch from 'youch';
-import { environment, email_admin } from '../../../configs/geral';
+import { environment, email_admin } from '@configs/geral';
 import { generateStatus } from '../../helpers/status';
 import { AppException } from '../../exceptions/AppException';
 

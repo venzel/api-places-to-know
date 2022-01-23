@@ -1,16 +1,20 @@
 import { container } from 'tsyringe';
 
-import { TokenProvider } from './models/TokenProvider';
+import { TokenProvider } from './TokenProvider';
 import { JWTTokenProvider } from './implements/JWTTokenProvider';
 
 class TokenProviderStrategy {
     private strategies: any = {};
 
     constructor() {
+        this.initStrategies();
+    }
+
+    initStrategies(): void {
         this.strategies['jwt'] = () => JWTTokenProvider;
     }
 
-    public setStrategy(service: string): void {
+    setStrategy(service: string): void {
         const existsStrategy = this.strategies.hasOwnProperty(service);
 
         if (!existsStrategy) {
