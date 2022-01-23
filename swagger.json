@@ -9,7 +9,7 @@
         }
     },
     "host": "http://143.198.112.106:3021",
-    "basePath": "./",
+    "basePath": "/",
     "paths": {
         "/login": {
             "post": {
