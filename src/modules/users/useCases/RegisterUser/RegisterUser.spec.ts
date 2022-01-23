@@ -24,7 +24,6 @@ describe('RegisterUserService', () => {
 
     it('should be register a new user', async () => {
         const generateHash = jest.spyOn(hashProvider, 'gererateHash');
-        const generateToken = jest.spyOn(tokenProvider, 'generateToken');
 
         const user = await registerUserService.execute({
             name: 'tiago',
@@ -32,11 +31,8 @@ describe('RegisterUserService', () => {
             password: 'penadepato',
         });
 
-        expect(generateHash).toHaveBeenCalledWith('penadepato');
-
-        // expect(generateToken).toHaveBeenCalledWith({ _id: user._id, email: user.email });
-
         expect(user).toHaveProperty('_id');
+        expect(generateHash).toHaveBeenCalledWith('penadepato');
     });
 
     // TEST 2

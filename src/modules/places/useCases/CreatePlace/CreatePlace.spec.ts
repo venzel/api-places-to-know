@@ -25,9 +25,8 @@ describe('CreatePlaceService', () => {
             name: 'elefante',
         });
 
-        expect(getUrlPhoto).toHaveBeenCalledWith('elefante');
-
         expect(placeCreated).toHaveProperty('_id');
+        expect(getUrlPhoto).toHaveBeenCalledWith('elefante');
     });
 
     // TEST 2
@@ -35,7 +34,7 @@ describe('CreatePlaceService', () => {
     it('should be not create a new place', async () => {
         createPlaceService = new CreatePlaceService(placeRepository, photoStockProvider);
 
-        const nameToFailGenerate = 'tigre';
+        const nameToFailGenerate = 'londres';
 
         await createPlaceService.execute({ name: nameToFailGenerate });
 

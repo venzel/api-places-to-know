@@ -8,6 +8,16 @@
             "email": "eneas.eng@yahoo.com"
         }
     },
+    "servers": [
+        {
+            "url": "http://localhost:3020/v1",
+            "description": "Api test"
+        },
+        {
+            "url": "http://143.198.112.106:3021/v3",
+            "description": "Api production"
+        }
+    ],
     "paths": {
         "/login": {
             "post": {

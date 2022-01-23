@@ -30,7 +30,7 @@ class Middleware {
 
         app.use(express.json());
 
-        app.use('/api', swagger.serve, swagger.setup(swagerJson));
+        app.use('/v3', swagger.serve, swagger.setup(swagerJson));
 
         app.use(route.execute());
 
