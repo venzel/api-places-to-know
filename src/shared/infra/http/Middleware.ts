@@ -14,6 +14,7 @@ import swagerJson from '../../../../swagger.json';
 
 class Middleware {
     public use(app: Express): void {
+        app.use('/api-docs', swagger.serve, swagger.setup(swagerJson));
         app.use(cors());
 
         if (environment !== 'development') {
@@ -29,8 +30,6 @@ class Middleware {
         app.use(express.urlencoded({ extended: true }));
 
         app.use(express.json());
-
-        app.use('/api-docs', swagger.serve, swagger.setup(swagerJson));
 
         app.use(route.execute());
 

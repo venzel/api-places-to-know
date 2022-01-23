@@ -8,8 +8,7 @@
             "email": "eneas.eng@yahoo.com"
         }
     },
-    "host": "http://143.198.112.106:3021",
-    "basePath": "/",
+    "servers": [],
     "paths": {
         "/login": {
             "post": {
@@ -186,14 +185,6 @@
                                             },
                                             "photo": {
                                                 "type": "string"
-                                            },
-                                            "date_created": {
-                                                "type": "string",
-                                                "format": "date-time"
-                                            },
-                                            "date_updated": {
-                                                "type": "string",
-                                                "format": "date-time"
                                             }
                                         }
                                     }
