@@ -11,6 +11,7 @@ import { route } from './Route';
 import { environment } from '@configs/geral';
 import { sentry_dsn } from '@configs/sentry';
 import swagerJson from '../../../../swagger.json';
+const pathToSwaggerUi = require('swagger-ui-dist').absolutePath();
 
 class Middleware {
     public use(app: Express): void {
@@ -31,6 +32,8 @@ class Middleware {
         app.use(express.json());
 
         app.use('/api', swagger.serve, swagger.setup(swagerJson));
+
+        app.use(express.static(pathToSwaggerUi));
 
         app.use(route.execute());
 

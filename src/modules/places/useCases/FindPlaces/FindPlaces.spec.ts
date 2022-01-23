@@ -49,7 +49,6 @@ describe('FindPlacesService', () => {
         const firstResult = result[0];
 
         expect(firstResult).toHaveProperty('_id');
-
         expect(firstResult.slug).toBe('brazil');
     });
 
